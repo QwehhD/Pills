@@ -105,6 +105,22 @@ export class AuthService {
     return { access_token };
   }
 
+  async me(userId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        created_at: true,
+        patientProfile: true,
+      },
+    });
+    if (!user) throw new UnauthorizedException();
+    return user;
+  }
+
   private async assertEmailAvailable(email: string) {
     const exists = await this.prisma.user.findUnique({ where: { email } });
     if (exists) throw new ConflictException('Email already registered');
