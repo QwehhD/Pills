@@ -20,6 +20,7 @@ model User {
     id         String   @id @default(uuid())
     email      String   @unique
     password   String
+    name       String
     role       Role
     created_at DateTime @default(now())
 
@@ -30,24 +31,24 @@ model User {
 }
 
 model PatientProfile {
-    id        String   @id @default(uuid())
-    user_id     String   @unique
-    doctor_id       String
-    age Int
-    disease String
-    phone String
+    id        String @id @default(uuid())
+    user_id   String @unique
+    doctor_id String
+    age       Int
+    disease   String
+    phone     String
 
-    user User @relation("ProfileOwner", fields: [user_id], references: [id], onDelete: Cascade)
+    user   User @relation("ProfileOwner", fields: [user_id], references: [id], onDelete: Cascade)
     doctor User @relation("AssignedDoctor", fields: [doctor_id], references: [id], onDelete: Cascade)
 }
 
 model Schedule {
-    id String @id @default(uuid())
-    doctor_id String
-    patient_id String
+    id            String         @id @default(uuid())
+    doctor_id     String
+    patient_id    String
     medicine_name String
-    dose String
-    status ScheduleStatus @default(PENDING)
-    doctor User @relation("DoctorSchedules", fields: [doctor_id], references: [id], onDelete: Cascade)
-    patient User @relation("PatientSchedules", fields: [patient_id], references: [id], onDelete: Cascade)
+    dose          String
+    status        ScheduleStatus @default(PENDING)
+    doctor        User           @relation("DoctorSchedules", fields: [doctor_id], references: [id], onDelete: Cascade)
+    patient       User           @relation("PatientSchedules", fields: [patient_id], references: [id], onDelete: Cascade)
 }
