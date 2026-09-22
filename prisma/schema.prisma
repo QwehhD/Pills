@@ -25,7 +25,7 @@ model User {
     created_at DateTime @default(now())
 
     patientProfile     PatientProfile?  @relation("ProfileOwner")
-    patientsASDoctor   PatientProfile[] @relation("AssignedDoctor")
+    patientsAsDoctor   PatientProfile[] @relation("AssignedDoctor")
     schedulesAsDoctor  Schedule[]       @relation("DoctorSchedules")
     schedulesAsPatient Schedule[]       @relation("PatientSchedules")
 }
