@@ -49,6 +49,7 @@ model Schedule {
     medicine_name String
     dose          String
     status        ScheduleStatus @default(PENDING)
+    created_at DateTime @default(now())
     doctor        User           @relation("DoctorSchedules", fields: [doctor_id], references: [id], onDelete: Cascade)
     patient       User           @relation("PatientSchedules", fields: [patient_id], references: [id], onDelete: Cascade)
 }
