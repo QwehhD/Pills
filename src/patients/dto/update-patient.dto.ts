@@ -1,6 +1,6 @@
-import {OmitType, PartialType} from '@nestjs/mapped-types';
-import {CreatePatientDto} from './create-patient.dto';
+import { OmitType, PartialType } from '@nestjs/swagger';
+import { CreatePatientDto } from './create-patient.dto';
 
-export class UpdatePatientDto extends PartialType (
-    OmitType(CreatePatientDto, ['email', 'password'] as const),
+export class UpdatePatientDto extends PartialType(
+  OmitType(CreatePatientDto, ['email', 'password'] as const),
 ) {}

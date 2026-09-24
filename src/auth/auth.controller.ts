@@ -14,8 +14,10 @@ import { LoginDto } from './dto/login.dto';
 import { RegisterPatientDto } from './dto/register-patient.dto';
 import { RegisterDto } from './dto/register.dto';
 import type { AuthUser } from './strategies/jwt.strategy';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @Controller('auth')
+@ApiTags('Auth')
+@ApiBearerAuth()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

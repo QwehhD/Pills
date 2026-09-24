@@ -19,7 +19,10 @@ import { RolesGuard } from '../common/guards/roles.guard';
 import { CreateScheduleDto } from './dto/create-schedule.dto';
 import { UpdateScheduleDto } from './dto/update-schedule.dto';
 import { SchedulesService } from './schedules.service';
+import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Schedules')
+@ApiBearerAuth()
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(Role.DOCTOR)
 @Controller('schedules')
@@ -32,6 +35,7 @@ export class SchedulesController {
     return this.schedulesService.findMine(patient.id);
   }
 
+  @ApiQuery({ name: 'patient_id', required: false, format: 'uuid' })
   @Get()
   findAll(
     @CurrentUser() doctor: AuthUser,
