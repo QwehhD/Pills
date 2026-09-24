@@ -4,7 +4,6 @@ import { HardwareService } from './hardware.service';
 import { ApiSecurity, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Hardware')
-@ApiSecurity('api-key')
 @ApiSecurity('hardware-key')
 @UseGuards(ApiKeyGuard)
 @Controller('hardware')
