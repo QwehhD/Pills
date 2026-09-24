@@ -17,32 +17,32 @@ import type { AuthUser } from './strategies/jwt.strategy';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @Controller('auth')
 @ApiTags('Auth')
-@ApiBearerAuth()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
-
+  
   @Get('doctors')
   getDoctors() {
     return this.authService.getDoctors();
   }
-
+  
   @Post('register')
   register(@Body() dto: RegisterDto) {
     return this.authService.register(dto);
   }
-
+  
   @Post('register/patient')
   registerPatient(@Body() dto: RegisterPatientDto) {
     return this.authService.registerPatient(dto);
   }
-
+  
   @HttpCode(HttpStatus.OK)
   @Post('login')
   login(@Body() dto: LoginDto) {
     return this.authService.login(dto);
   }
-
+  
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Get('me')
   me(@CurrentUser() user: AuthUser) {
     return this.authService.me(user.id);
