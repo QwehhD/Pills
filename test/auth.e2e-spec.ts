@@ -32,7 +32,7 @@ describe('JWT token (e2e)', () => {
   let patientToken: string;
 
   beforeAll(async () => {
-    process.env.MQTT_ENABLE = 'false';
+    process.env.MQTT_ENABLED = 'false';
 
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
