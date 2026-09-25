@@ -32,6 +32,8 @@ describe('JWT token (e2e)', () => {
   let patientToken: string;
 
   beforeAll(async () => {
+    process.env.MQTT_ENABLE = 'false';
+
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -72,7 +74,11 @@ describe('JWT token (e2e)', () => {
     it('400: menyelipkan role ditolak', () =>
       request(app.getHttpServer())
         .post('/auth/register')
-        .send({ ...doctor, email: `e2e-lain-${runId}@pills.id`, role: 'PATIENT' })
+        .send({
+          ...doctor,
+          email: `e2e-lain-${runId}@pills.id`,
+          role: 'PATIENT',
+        })
         .expect(400));
   });
 
@@ -181,8 +187,6 @@ describe('JWT token (e2e)', () => {
 
   describe('hardware', () => {
     it('401: tanpa x-api-key', () =>
-      request(app.getHttpServer())
-        .get('/hardware/check-schedule')
-        .expect(401));
+      request(app.getHttpServer()).get('/hardware/check-schedule').expect(401));
   });
 });
