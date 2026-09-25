@@ -55,6 +55,12 @@ API berjalan di `http://localhost:3000`.
 
 Kirim token dengan header `Authorization: Bearer <access_token>`.
 
+## MQTT
+
+Kalau `MQTT_ENABLED=true`, server mengecek jadwal setiap menit dan mengirim jadwal yang jatuh
+tempo ke topik `<MQTT_TOPIC_PREFIX>/patients/<patientId>/dispense` (QoS 1), misalnya lewat
+HiveMQ Cloud. Tanpa MQTT, dispenser tetap bisa polling `GET /hardware/check-schedule`.
+
 ## Testing
 
 ```bash
