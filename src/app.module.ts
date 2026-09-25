@@ -5,6 +5,7 @@ import { HardwareModule } from './hardware/hardware.module';
 import { PatientsModule } from './patients/patients.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { SchedulesModule } from './schedules/schedules.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { SchedulesModule } from './schedules/schedules.module';
     PatientsModule,
     SchedulesModule,
     HardwareModule,
+    ScheduleModule,
   ],
 })
 export class AppModule {}
