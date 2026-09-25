@@ -15,7 +15,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     PatientsModule,
     SchedulesModule,
     HardwareModule,
-    ScheduleModule,
+    ScheduleModule.forRoot(),
   ],
 })
 export class AppModule {}
